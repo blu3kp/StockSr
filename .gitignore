@@ -1,0 +1,10 @@
+# executables and binaries compiled
+main
+StockSr
+*.out
+*.exe
+
+# Object files
+*.o
+*.obj
+EOF
