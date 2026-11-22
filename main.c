@@ -31,10 +31,10 @@ int main()
     printf("Tu gestor de almacen favorito...");
     printf("\n\n\n\n***********************************Login***********************************\n");
     printf("Usuario: ");
-    fgets(Usuario, sizeof(Usuario), stdin);
+    scanf(Usuario, sizeof(Usuario), stdin);
     Usuario[strcspn(Usuario, "\n")] = '\0';
     printf("Contrasena: ");
-    fgets(Contrasena, sizeof(Contrasena), stdin);
+    scanf(Contrasena, sizeof(Contrasena), stdin);
     Contrasena[strcspn(Contrasena, "\n")] = '\0';
 
     if (strcmp(Usuario, USUARIO) == 0 && strcmp(Contrasena, CONTRASENA) == 0)
