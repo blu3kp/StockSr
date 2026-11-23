@@ -25,3 +25,37 @@ typedef struct {
     char nombre[TAM_NOMBRE];   // nombre del material
     int  cantidad;             // piezas en stock
 } Material;
+
+/* ---------- Memoria dinámica local (RAM) ---------- */
+static Material *inventario = NULL; // arreglo dinámico de materiales
+static int total = 0;               // cuántos materiales hay
+static int capacidad = 0;           // cuántos caben antes de pedir más memoria
+static int siguienteId = 1;         // para asignar IDs automáticos
+
+/* ============================================================ */
+/*                    UTILIDADES DE ENTRADA                     */
+/* ============================================================ */
+
+// Lee una línea de texto de forma segura y quita el salto de línea
+void leerTexto(const char *mensaje, char *destino, int tam) {
+    printf("%s", mensaje);
+    if (fgets(destino, tam, stdin) == NULL) {
+        destino[0] = '\0';
+        return;
+    }
+    destino[strcspn(destino, "\n")] = '\0';  // reemplaza '\n' por fin de cadena
+}
+
+// Lee un entero validado; repite hasta que sea >= minimo
+int leerEntero(const char *mensaje, int minimo) {
+    char buffer[32];
+    char *fin;
+    long valor;
+    while (1) {
+        leerTexto(mensaje, buffer, sizeof(buffer));
+        valor = strtol(buffer, &fin, 10);          // convierte texto a número
+        if (fin != buffer &&Pseudocódigo de RF01 (Autenticación). *fin == '\0' && valor >= minimo && valor <= 1000000)
+            return (int)valor;
+        printf("  Entrada invalida. Escribe un numero entero >= %d.\n", minimo);
+    }
+}
