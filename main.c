@@ -87,3 +87,17 @@ void alertaStock(const Material *m) {
                m->nombre, m->cantidad);
     }
 }
+
+// Asegura espacio para un material más; duplica la memoria si está llena
+int asegurarCapacidad(void) {
+    if (total < capacidad) return 1;
+    int nueva = (capacidad == 0) ? 4 : capacidad * 2;
+    Material *tmp = realloc(inventario, nueva * sizeof(Material));
+    if (tmp == NULL) {                    // realloc puede fallar
+        printf("  Error: no hay memoria disponible.\n");
+        return 0;
+    }
+    inventario = tmp;
+    capacidad = nueva;
+    return 1;
+}
