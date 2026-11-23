@@ -101,3 +101,27 @@ int asegurarCapacidad(void) {
     capacidad = nueva;
     return 1;
 }
+
+/* ============================================================ */
+/*                 FUNCIONES DEL SUBMENU MATERIAL               */
+/* ============================================================ */
+
+// ALTAS: agrega un material nuevo
+void altaMa
+terial(void) {
+    if (!asegurarCapacidad()) return;
+
+    Material nuevo;
+    nuevo.id = siguienteId;
+    leerTexto("  Nombre del material: ", nuevo.nombre, TAM_NOMBRE);
+    if (strlen(nuevo.nombre) == 0) {
+        printf("  El nombre no puede estar vacio.\n");
+        return;
+    }
+    nuevo.cantidad = leerEntero("  Cantidad inicial: ", 0);
+
+    inventario[total++] = nuevo;
+    siguienteId++;
+    printf("  Material agregado con ID %d.\n", nuevo.id);
+    alertaStock(&nuevo);
+}
