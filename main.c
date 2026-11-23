@@ -59,3 +59,31 @@ int leerEntero(const char *mensaje, int minimo) {
         printf("  Entrada invalida. Escribe un numero entero >= %d.\n", minimo);
     }
 }
+
+// Convierte a minúsculas (para buscar sin importar mayúsculas)
+void aMinusculas(const char *origen, char *destino) {
+    int i;
+    for (i = 0; origen[i] != '\0'; i++)
+        destino[i] = (char)tolower((unsigned char)origen[i]);
+    destino[i] = '\0';
+}
+
+/* ============================================================ */ 
+/*                 UTILIDADES DE INVENTARIO                     */
+/* ============================================================ */
+
+// Busca un material por ID. Regresa su posición o -1 si no existe
+int buscarIndicePorId(int id) {
+    for (int i = 0; i < total; i++)
+        if (inventario[i].id == id) return i;
+    return -1;
+}
+
+// Alerta con sonido ('\a' = beep) si el stock es bajo
+void alertaStock(const Material *m) {
+    if (m->cantidad <= STOCK_MINIMO) {
+        printf("\a\a\a");  // 3 beeps
+        printf("  *** ALERTA: \"%s\" tiene stock bajo (%d pieza(s)) ***\n",
+               m->nombre, m->cantidad);
+    }
+}
